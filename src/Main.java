@@ -10,22 +10,36 @@ public class Main {
 
         String continuar = "s";
         while (continuar.equalsIgnoreCase("s")) {
-            /*UTILIZA "Calculadora.lerNumero()" PQ O METODO "lerNumero" É ESTÁTIC, ELE NÃO UTILIZA NENHUM OBJETO DA CLASSE.
-             *APENAS EXECUTA UM COMPORTAMENTO GERAL DE VALIDAR A ENTRADA DOS DADOS
-             */
-            double num1 = Calculadora.lerNumero(scanner, "Digite o primeiro número: ");
-            double num2 = Calculadora.lerNumero(scanner, "Digite o segundo número: ");
 
-            //RECEBENDO O OPERADOR
-            String op = Calculadora.validarOperador(scanner);
+            double num1 = 0;
+            double num2 = 0;
+            boolean sucesso;
 
-            calc.setNum1(num1);
-            calc.setNum2(num2);
-            calc.setOperacao(op);
-            calc.calcular(num1, num2);
+            do{
 
-            //System.out.println("TT" + num1 + op + num2 + " = " +  calc.getResult());
+                /*UTILIZA "Calculadora.lerNumero()" PQ O METODO "lerNumero" É ESTÁTIC, ELE NÃO UTILIZA NENHUM OBJETO DA CLASSE.
+                 *APENAS EXECUTA UM COMPORTAMENTO GERAL DE VALIDAR A ENTRADA DOS DADOS
+                 */
+
+                num1 = Calculadora.lerNumero(scanner, "Digite o primeiro número: ");
+                num2 = Calculadora.lerNumero(scanner, "Digite o segundo número: ");
+
+                //RECEBENDO O OPERADOR
+                String op = Calculadora.validarOperador(scanner);
+
+                calc.setNum1(num1);
+                calc.setNum2(num2);
+                calc.setOperacao(op);
+                sucesso = calc.calcular(num1, num2); //
+
+                if (!sucesso){
+                    System.out.println("Digite novamente");
+                }
+
+            }while (!sucesso);
+
             System.out.printf("%.2f %s %.2f = %.2f%n", num1, calc.getDescricaoOperador(), num2, calc.getResult());
+
 
             System.out.println("Deseja realizar outro cálculo? (s/n)");
             continuar = scanner.next();

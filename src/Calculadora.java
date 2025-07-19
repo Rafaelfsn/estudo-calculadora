@@ -60,6 +60,7 @@ public class Calculadora {
    public static String validarOperador(Scanner scanner){
         String op = "";
         boolean valido = false;
+
         while (!valido) {
 
             System.out.println("==== Qual tipo de operação deseja realizar? ====");
@@ -74,10 +75,11 @@ public class Calculadora {
                 //scanner.next();
             }
         }
+
         return op;
    }
 
-    public void calcular(double num1, double num2){
+    public boolean calcular(double num1, double num2){
         switch (operacao){
             case "+":
                 result = num1 + num2;
@@ -90,15 +92,17 @@ public class Calculadora {
                 break;
             case "/":
                 if (num2 == 0){
-                    System.out.print("Erro! Não é possível dividir por Zero.");
+                    System.out.println("Erro! Não é possível dividir por Zero.");
+                    return false;
                 }else {
                     result = num1 / num2;
                 }
                 break;
             default:
                 System.out.println("Operação Inválida!");
-                return;
+                return false;
         }
+        return true;
     }
 
     public String getDescricaoOperador(){
